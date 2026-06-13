@@ -1,0 +1,54 @@
+# ── Environment files (NEVER commit these) ───────────────────
+**/.env
+**/.env.local
+**/.env.production
+# .env.example files ARE safe to commit (they have no real secrets)
+
+# ── Python ───────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# ── Virtual environments ──────────────────────────────────────
+venv/
+.venv/
+env/
+backend/venv/
+
+# ── Database ──────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Uploaded files ────────────────────────────────────────────
+backend/uploads/
+
+# ── Node / Frontend ───────────────────────────────────────────
+node_modules/
+dist/
+.output/
+.vinxi/
+.tanstack/
+.nitro/
+*.local
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── OS ────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── IDE ───────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Claude Code internal files ────────────────────────────────
+.claude/
