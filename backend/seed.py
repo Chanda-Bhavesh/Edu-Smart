@@ -1,7 +1,7 @@
 """
-Seed script — creates demo users for all roles.
+Seed script - creates demo users for all roles.
 Run from the backend/ directory:
-  C:\scms_venv\Scripts\python.exe seed.py
+  python seed.py
 """
 import asyncio
 import uuid
