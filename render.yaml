@@ -1,0 +1,67 @@
+services:
+  # ── Backend (FastAPI) ──────────────────────────────────────────────────────
+  - type: web
+    name: scms-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash start.sh
+    envVars:
+      - key: APP_NAME
+        value: SCMS
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: APP_SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: JWT_ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+      - key: JWT_REFRESH_TOKEN_EXPIRE_DAYS
+        value: "7"
+      - key: DATABASE_URL
+        value: sqlite+aiosqlite:///./scms.db
+      - key: REDIS_URL
+        value: ""
+      - key: UPLOAD_DIR
+        value: uploads
+      - key: MAX_FILE_SIZE_MB
+        value: "10"
+      - key: RATE_LIMIT_PER_MINUTE
+        value: "60"
+      - key: ANTHROPIC_API_KEY
+        value: ""
+      - key: SMTP_HOST
+        value: smtp.gmail.com
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_USERNAME
+        value: ""
+      - key: SMTP_PASSWORD
+        value: ""
+      - key: EMAILS_FROM_EMAIL
+        value: noreply@scms.edu
+      - key: EMAILS_FROM_NAME
+        value: SCMS Platform
+      # Set these AFTER frontend is deployed (paste your frontend Render URL)
+      - key: FRONTEND_URL
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+
+  # ── Frontend (React SSR) ───────────────────────────────────────────────────
+  - type: web
+    name: scms-frontend
+    runtime: node
+    rootDir: edu-vista-plus
+    buildCommand: npm install && npm run build
+    startCommand: node .output/server/index.mjs
+    envVars:
+      # Tells nitro to build for Node.js instead of Cloudflare (default)
+      - key: NITRO_PRESET
+        value: node-server
+      # Set this AFTER backend is deployed (paste your backend Render URL + /api/v1)
+      - key: VITE_API_BASE
+        sync: false
